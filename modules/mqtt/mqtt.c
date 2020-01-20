@@ -18,7 +18,7 @@ static char mqttpassword[256] = "";
 /* Client ID - default "baresip" */
 static char mqttclientid[256] = "baresip";
 /* Base topic for MQTT - default "baresip" - i.e. /baresip/event */
-static char mqttbasetopic[128] = "baresip";
+static char mqttbasetopic[128] = "/baresip";
 static char mqttpublishtopic[256];
 static char mqttsubscribetopic[256];
 
@@ -104,8 +104,8 @@ static int module_init(void)
 		broker_host, broker_port, mqttclientid, mqttbasetopic);
 
 	re_snprintf(mqttsubscribetopic, sizeof(mqttsubscribetopic),
-		    "/%s/command/+", mqttbasetopic);
-	re_snprintf(mqttpublishtopic, sizeof(mqttpublishtopic), "/%s/event",
+		    "%s/command/+", mqttbasetopic);
+	re_snprintf(mqttpublishtopic, sizeof(mqttpublishtopic), "%s/event",
 		    mqttbasetopic);
 
 	info("mqtt: Publishing on %s, subscribing to %s\n",
